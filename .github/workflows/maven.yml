@@ -1,5 +1,11 @@
 name: Only Tests
 
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
 jobs:
   run-all-testes:
 
