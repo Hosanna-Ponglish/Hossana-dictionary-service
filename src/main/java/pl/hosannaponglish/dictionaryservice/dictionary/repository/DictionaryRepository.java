@@ -14,6 +14,6 @@ import java.util.Optional;
 
 public interface DictionaryRepository extends JpaRepository<Dictionary, Long>{
 
-    @Query(value = "select d from Dictionary d where d.translation_en like :data or d.translation_pl like :data")
+    @Query(value = "select d from Dictionary d where d.translationEn like :data or d.translationPl like :data")
     Optional<Dictionary> simpleSearch(@Param("data") String data);
 }
