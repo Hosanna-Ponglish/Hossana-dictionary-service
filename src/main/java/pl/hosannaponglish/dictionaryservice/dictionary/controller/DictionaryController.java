@@ -17,7 +17,7 @@ import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryService
  */
 
 @RestController
-@RequestMapping("api/v1/Dictionary/")
+@RequestMapping("api/v1/dictionary/")
 @RequiredArgsConstructor
 public class DictionaryController{
 

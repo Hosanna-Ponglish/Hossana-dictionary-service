@@ -13,19 +13,19 @@ import lombok.Setter;
  * created on 15.10.2023
  */
 @Entity
-@Table(name = "dictionary_en_pl")
+@Table(name = "dictionary_en")
 @Getter
 @Setter
 @NoArgsConstructor
 public class Dictionary{
     @Id
-    private Long dictionary_en_pl_id;
+    private Long dictionaryId;
 
     @NotNull
-    private String translation_en;
+    private String translationEn;
 
     @NotNull
-    private String translation_pl;
+    private String translationPl;
 
     private String category;
 }
