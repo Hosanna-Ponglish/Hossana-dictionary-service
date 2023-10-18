@@ -1,4 +1,4 @@
-package pl.hosannaponglish.dictionaryservice.dictionaryEnPl.model;
+package pl.hosannaponglish.dictionaryservice.dictionary.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -17,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class DictionaryEnPl{
+public class Dictionary{
     @Id
     private Long dictionary_en_pl_id;
 
