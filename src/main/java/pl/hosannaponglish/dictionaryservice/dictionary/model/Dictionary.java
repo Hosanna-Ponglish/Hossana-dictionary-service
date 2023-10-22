@@ -6,7 +6,7 @@ package pl.hosannaponglish.dictionaryservice.dictionary.model;
  */
 public interface Dictionary{
 
-    public Long getDictionaryId();
+    public Long getId();
 
     public String getExpression();
 

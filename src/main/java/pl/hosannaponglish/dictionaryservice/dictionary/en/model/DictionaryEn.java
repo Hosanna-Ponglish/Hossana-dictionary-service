@@ -1,8 +1,6 @@
 package pl.hosannaponglish.dictionaryservice.dictionary.en.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,13 +19,11 @@ import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
 public class DictionaryEn implements Dictionary{
 
     @Id
-    private Long dictionaryId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotNull
     private String expression;
-
-    @NotNull
-    private String targetTranslation;
 
     private String category;
 }

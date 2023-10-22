@@ -1,4 +1,4 @@
-package pl.hosannaponglish.dictionaryservice.dictionary.es.model;
+package pl.hosannaponglish.dictionaryservice.dictionary.pl.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -9,7 +9,7 @@ import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
 
 /**
  * @author Bartosz Średziński
- * created on 21.10.2023
+ * created on 22.10.2023
  */
 
 @Entity
@@ -17,7 +17,7 @@ import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
 @Getter
 @Setter
 @NoArgsConstructor
-public class DictionaryEs implements Dictionary{
+public class DictionaryPl implements Dictionary{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
