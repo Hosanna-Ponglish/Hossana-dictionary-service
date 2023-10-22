@@ -13,21 +13,21 @@ class StringToLanguageCodeConverterTest{
     private final StringToLanguageCodeConverter converter = new StringToLanguageCodeConverter();
 
     @Test
-    public void testConvertValidValue() {
+    void testConvertValidValue() {
         String validValue = "PL";
         LanguageCode result = converter.convert(validValue);
         assertEquals(LanguageCode.PL, result);
     }
 
     @Test
-    public void testConvertValidValueWithLowerCase() {
+    void testConvertValidValueWithLowerCase() {
         String validValue = "en";
         LanguageCode result = converter.convert(validValue);
         assertEquals(LanguageCode.EN, result);
     }
 
     @Test
-    public void testConvertInvalidValue() {
+    void testConvertInvalidValue() {
         String invalidValue = "InvalidCode";
 
         assertThrows(IllegalArgumentException.class, () -> converter.convert(invalidValue));

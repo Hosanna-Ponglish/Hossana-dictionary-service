@@ -47,12 +47,12 @@ class DictionaryControllerTest{
     private DictionaryPlService dictionaryPlService;
 
     @BeforeEach
-    public void setUp(){
+    void setUp(){
         when(serviceFactory.getService(LanguageCode.PL)).thenReturn(Optional.of(dictionaryPlService));
     }
 
     @Test
-    public void testGetAll() throws Exception{
+    void testGetAll() throws Exception{
         Long id = 1L;
         DictionaryPl dictionary = new DictionaryPl();
         dictionary.setId(id);
@@ -75,7 +75,7 @@ class DictionaryControllerTest{
     }
 
     @Test
-    public void testGetOne() throws Exception{
+    void testGetOne() throws Exception{
         Long id = 1L;
         Dictionary dictionary = new DictionaryPl();
         dictionary.setId(id);

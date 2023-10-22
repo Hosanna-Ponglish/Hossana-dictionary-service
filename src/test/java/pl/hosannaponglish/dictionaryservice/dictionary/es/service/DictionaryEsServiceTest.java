@@ -34,13 +34,13 @@ class DictionaryEsServiceTest{
     private DictionaryEsService dictionaryService;
 
     @BeforeEach
-    public void setup(){
+    void setup(){
         MockitoAnnotations.initMocks(this);
         dictionaryService = new DictionaryEsService(repository);
     }
 
     @Test
-    public void testGetAll(){
+    void testGetAll(){
         Pageable pageable = PageRequest.of(0, 10);
         Page<Dictionary> dummyPage = new PageImpl<>(Collections.emptyList(), pageable, 0);
 
@@ -53,7 +53,7 @@ class DictionaryEsServiceTest{
     }
 
     @Test
-    public void testGetOneById(){
+    void testGetOneById(){
         Long id = 1L;
         DictionaryEs dictionary = new DictionaryEs();
         dictionary.setId(id);
@@ -67,7 +67,7 @@ class DictionaryEsServiceTest{
     }
 
     @Test
-    public void testGetOneByIdNotFound(){
+    void testGetOneByIdNotFound(){
         Long id = 1L;
 
         when(repository.findById(id)).thenReturn(Optional.empty());
@@ -78,7 +78,7 @@ class DictionaryEsServiceTest{
     }
 
     @Test
-    public void testCanHandle(){
+    void testCanHandle(){
         assertTrue(dictionaryService.canHandle(LanguageCode.ES));
         assertFalse(dictionaryService.canHandle(LanguageCode.EN));
     }
