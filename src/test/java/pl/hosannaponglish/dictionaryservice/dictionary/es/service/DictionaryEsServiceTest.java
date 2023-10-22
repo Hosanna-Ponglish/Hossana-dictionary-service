@@ -85,7 +85,7 @@ class DictionaryEsServiceTest{
     }
 
     @Test
-    public void testAddNewDictionaryRecord(){
+    void testAddNewDictionaryRecord(){
         DictionaryDto dto = new DictionaryDto();
         dto.setExpression("Test Expression");
         dto.setCategory("Test Category");
@@ -104,7 +104,7 @@ class DictionaryEsServiceTest{
     }
 
     @Test
-    public void testDeleteByIdSuccess(){
+    void testDeleteByIdSuccess(){
         Long id = 1L;
 
         when(repository.existsById(id)).thenReturn(true);
@@ -116,7 +116,7 @@ class DictionaryEsServiceTest{
     }
 
     @Test
-    public void testDeleteByIdFail(){
+    void testDeleteByIdFail(){
         Long id = 1L;
 
         when(repository.existsById(id)).thenReturn(false);

@@ -95,7 +95,7 @@ class DictionaryControllerTest{
     }
 
     @Test
-    public void testDeleteOneSuccess() throws Exception{
+    void testDeleteOneSuccess() throws Exception{
         Long id = 1L;
         LanguageCode code = LanguageCode.PL;
 
@@ -107,7 +107,7 @@ class DictionaryControllerTest{
     }
 
     @Test
-    public void testDeleteOneNotFound() throws Exception{
+    void testDeleteOneNotFound() throws Exception{
         Long id = 1L;
         LanguageCode code = LanguageCode.PL;
 
@@ -119,7 +119,7 @@ class DictionaryControllerTest{
     }
 
     @Test
-    public void testCreateOneSuccess() throws Exception{
+    void testCreateOneSuccess() throws Exception{
         LanguageCode code = LanguageCode.PL;
         DictionaryDto dto = new DictionaryDto();
         dto.setExpression("Test Expression");
@@ -144,7 +144,7 @@ class DictionaryControllerTest{
     }
 
     @Test
-    public void testCreateOneFailure() throws Exception{
+    void testCreateOneFailure() throws Exception{
         LanguageCode code = LanguageCode.PL;
         DictionaryDto dto = new DictionaryDto();
         dto.setExpression("Test Expression");
