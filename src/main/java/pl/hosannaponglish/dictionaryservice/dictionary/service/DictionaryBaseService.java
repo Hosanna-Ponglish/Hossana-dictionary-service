@@ -13,7 +13,7 @@ public abstract class DictionaryBaseService<T extends Dictionary> implements Dic
 
     private final JpaRepository<T, Long> repository;
 
-    public DictionaryBaseService(JpaRepository<T, Long> repository){
+    protected DictionaryBaseService(JpaRepository<T, Long> repository){
         this.repository = repository;
     }
 
