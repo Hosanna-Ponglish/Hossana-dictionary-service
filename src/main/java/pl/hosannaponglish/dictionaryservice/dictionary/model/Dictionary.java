@@ -1,31 +1,14 @@
 package pl.hosannaponglish.dictionaryservice.dictionary.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 /**
  * @author Bartosz Średziński
- * created on 15.10.2023
+ * created on 21.10.2023
  */
-@Entity
-@Table(name = "dictionary_en")
-@Getter
-@Setter
-@NoArgsConstructor
-public class Dictionary{
-    @Id
-    private Long dictionaryId;
+public interface Dictionary{
 
-    @NotNull
-    private String translationEn;
+    public Long getDictionaryId();
 
-    @NotNull
-    private String translationPl;
+    public String getExpression();
 
-    private String category;
+    public String getCategory();
 }

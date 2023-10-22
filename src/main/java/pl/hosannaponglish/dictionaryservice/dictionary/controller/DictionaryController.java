@@ -1,6 +1,5 @@
 package pl.hosannaponglish.dictionaryservice.dictionary.controller;
 
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,8 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
+import pl.hosannaponglish.dictionaryservice.dictionary.exception.LanguageCodeNotSupported;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
-import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryService;
+import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryServiceFactory;
 
 /**
  * @author Bartosz Średziński
@@ -17,24 +18,23 @@ import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryService
  */
 
 @RestController
-@RequestMapping("api/v1/dictionary/")
+@RequestMapping("api/v1/dictionary/{code}")
 @RequiredArgsConstructor
 public class DictionaryController{
 
-    private final DictionaryService service;
+    private final DictionaryServiceFactory service;
 
     @GetMapping()
-    public Page<Dictionary> getAll(Pageable pageable){
-        return service.getAll(pageable);
+    public Page<Dictionary> getAll(@PathVariable LanguageCode code, Pageable pageable){
+        return service.getService(code)
+                .orElseThrow(() -> new LanguageCodeNotSupported())
+                .getAll(pageable);
     }
 
     @GetMapping("/{id}")
-    public Dictionary getOne(@PathVariable Long id){
-        return service.getOneById(id);
-    }
-
-    @GetMapping("/search")
-    public Dictionary simpleFind(@PathParam("data") String data){
-        return service.simpleFind(data);
+    public Dictionary getOne(@PathVariable LanguageCode code, @PathVariable Long id){
+        return service.getService(code)
+                .orElseThrow(() -> new LanguageCodeNotSupported())
+                .getOneById(id);
     }
 }
