@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
 import pl.hosannaponglish.dictionaryservice.dictionary.exception.DictionaryNotFoundException;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
+import pl.hosannaponglish.dictionaryservice.dictionary.model.DictionaryDto;
+import pl.hosannaponglish.dictionaryservice.dictionary.pl.model.DictionaryPl;
 import pl.hosannaponglish.dictionaryservice.dictionary.pl.repository.DictionaryPlRepository;
 import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryService;
 
@@ -39,6 +41,16 @@ public class DictionaryPlService implements DictionaryService{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Dictionary addNewDictionaryRecord(DictionaryDto dto){
+        DictionaryPl newDictionary = new DictionaryPl();
+
+        newDictionary.setExpression(dto.getExpression());
+        newDictionary.setCategory(dto.getCategory());
+
+        return repository.save(newDictionary);
     }
 
     @Override

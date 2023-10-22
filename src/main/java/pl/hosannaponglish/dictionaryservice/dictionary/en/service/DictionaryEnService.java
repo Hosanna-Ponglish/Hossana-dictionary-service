@@ -5,9 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
+import pl.hosannaponglish.dictionaryservice.dictionary.en.model.DictionaryEn;
 import pl.hosannaponglish.dictionaryservice.dictionary.en.repository.DictionaryEnRepository;
 import pl.hosannaponglish.dictionaryservice.dictionary.exception.DictionaryNotFoundException;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
+import pl.hosannaponglish.dictionaryservice.dictionary.model.DictionaryDto;
 import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryService;
 
 /**
@@ -39,6 +41,16 @@ public class DictionaryEnService implements DictionaryService{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Dictionary addNewDictionaryRecord(DictionaryDto dto){
+        DictionaryEn newDictionary = new DictionaryEn();
+
+        newDictionary.setExpression(dto.getExpression());
+        newDictionary.setCategory(dto.getCategory());
+
+        return repository.save(newDictionary);
     }
 
     @Override

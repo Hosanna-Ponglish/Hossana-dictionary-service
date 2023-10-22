@@ -12,5 +12,9 @@ public interface Dictionary{
 
     String getExpression();
 
+    void setExpression(String expression);
+
     String getCategory();
+
+    void setCategory(String category);
 }

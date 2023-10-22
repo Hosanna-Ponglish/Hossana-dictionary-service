@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
+import pl.hosannaponglish.dictionaryservice.dictionary.model.DictionaryDto;
 
 /**
  * @author Bartosz Średziński
@@ -19,4 +20,7 @@ public interface DictionaryService{
     boolean deleteById(Long id);
 
     boolean canHandle(LanguageCode code);
+
+    Dictionary addNewDictionaryRecord(DictionaryDto dto);
+
 }

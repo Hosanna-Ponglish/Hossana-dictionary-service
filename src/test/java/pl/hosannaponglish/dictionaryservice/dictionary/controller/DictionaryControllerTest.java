@@ -1,5 +1,6 @@
 package pl.hosannaponglish.dictionaryservice.dictionary.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -11,9 +12,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
+import pl.hosannaponglish.dictionaryservice.dictionary.model.DictionaryDto;
 import pl.hosannaponglish.dictionaryservice.dictionary.pl.model.DictionaryPl;
 import pl.hosannaponglish.dictionaryservice.dictionary.pl.service.DictionaryPlService;
 import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryServiceFactory;
@@ -111,5 +116,56 @@ class DictionaryControllerTest{
 
         mockMvc.perform(delete("/api/v1/dictionary/PL/" + id))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void testCreateOneSuccess() throws Exception{
+        LanguageCode code = LanguageCode.PL;
+        DictionaryDto dto = new DictionaryDto();
+        dto.setExpression("Test Expression");
+        dto.setCategory("Test Category");
+
+        when(serviceFactory.getService(code)).thenReturn(Optional.of(dictionaryPlService));
+
+        Dictionary createdDictionary = new DictionaryPl();
+        createdDictionary.setId(1L);
+        when(dictionaryPlService.addNewDictionaryRecord(any(DictionaryDto.class))).thenReturn(createdDictionary);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/dictionary/pl/")
+                        .content(asJsonString(dto))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status()
+                        .isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id")
+                        .exists())
+                .andExpect(MockMvcResultMatchers.content()
+                        .contentType(MediaType.APPLICATION_JSON));
+
+    }
+
+    @Test
+    public void testCreateOneFailure() throws Exception{
+        LanguageCode code = LanguageCode.PL;
+        DictionaryDto dto = new DictionaryDto();
+        dto.setExpression("Test Expression");
+        dto.setCategory("Test Category");
+
+        when(serviceFactory.getService(code)).thenReturn(Optional.of(dictionaryPlService));
+
+        when(dictionaryPlService.addNewDictionaryRecord(any(DictionaryDto.class))).thenReturn(null);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/dictionary/pl/")
+                        .content(asJsonString(dto))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status()
+                        .isBadRequest());
+    }
+
+    private String asJsonString(final Object obj){
+        try{
+            return new ObjectMapper().writeValueAsString(obj);
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
     }
 }

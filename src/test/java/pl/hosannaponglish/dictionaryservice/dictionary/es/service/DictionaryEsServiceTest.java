@@ -13,6 +13,7 @@ import pl.hosannaponglish.dictionaryservice.dictionary.es.model.DictionaryEs;
 import pl.hosannaponglish.dictionaryservice.dictionary.es.repository.DictionaryEsRepository;
 import pl.hosannaponglish.dictionaryservice.dictionary.exception.DictionaryNotFoundException;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
+import pl.hosannaponglish.dictionaryservice.dictionary.model.DictionaryDto;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -81,5 +82,48 @@ class DictionaryEsServiceTest{
     void testCanHandle(){
         assertTrue(dictionaryService.canHandle(LanguageCode.ES));
         assertFalse(dictionaryService.canHandle(LanguageCode.EN));
+    }
+
+    @Test
+    public void testAddNewDictionaryRecord(){
+        DictionaryDto dto = new DictionaryDto();
+        dto.setExpression("Test Expression");
+        dto.setCategory("Test Category");
+
+        DictionaryEs newDictionary = new DictionaryEs();
+        newDictionary.setExpression(dto.getExpression());
+        newDictionary.setCategory(dto.getCategory());
+
+        when(repository.save(any(DictionaryEs.class))).thenReturn(newDictionary);
+
+        Dictionary result = dictionaryService.addNewDictionaryRecord(dto);
+
+        assertNotNull(result);
+        assertEquals(dto.getExpression(), result.getExpression());
+        assertEquals(dto.getCategory(), result.getCategory());
+    }
+
+    @Test
+    public void testDeleteByIdSuccess(){
+        Long id = 1L;
+
+        when(repository.existsById(id)).thenReturn(true);
+
+        boolean result = dictionaryService.deleteById(id);
+
+        assertTrue(result);
+        verify(repository).deleteById(id);
+    }
+
+    @Test
+    public void testDeleteByIdFail(){
+        Long id = 1L;
+
+        when(repository.existsById(id)).thenReturn(false);
+
+        boolean result = dictionaryService.deleteById(id);
+
+        assertFalse(result);
+        verify(repository, never()).deleteById(id);
     }
 }

@@ -1,13 +1,16 @@
 package pl.hosannaponglish.dictionaryservice.dictionary.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
 import pl.hosannaponglish.dictionaryservice.dictionary.exception.LanguageCodeNotSupported;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
+import pl.hosannaponglish.dictionaryservice.dictionary.model.DictionaryDto;
 import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryServiceFactory;
 
 /**
@@ -48,6 +51,21 @@ public class DictionaryController{
         }
 
         return ResponseEntity.notFound()
+                .build();
+    }
+
+    @PostMapping()
+    public ResponseEntity<Dictionary> createOne(@PathVariable LanguageCode code, @RequestBody @Valid DictionaryDto dto){
+        Dictionary createdDictionary = service.getService(code)
+                .orElseThrow(LanguageCodeNotSupported::new)
+                .addNewDictionaryRecord(dto);
+
+        if(createdDictionary != null){
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(createdDictionary);
+        }
+
+        return ResponseEntity.badRequest()
                 .build();
     }
 }

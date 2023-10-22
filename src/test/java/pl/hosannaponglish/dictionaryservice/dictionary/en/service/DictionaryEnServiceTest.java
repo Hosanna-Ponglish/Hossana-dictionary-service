@@ -13,6 +13,7 @@ import pl.hosannaponglish.dictionaryservice.dictionary.en.model.DictionaryEn;
 import pl.hosannaponglish.dictionaryservice.dictionary.en.repository.DictionaryEnRepository;
 import pl.hosannaponglish.dictionaryservice.dictionary.exception.DictionaryNotFoundException;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
+import pl.hosannaponglish.dictionaryservice.dictionary.model.DictionaryDto;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -24,6 +25,7 @@ import static org.mockito.Mockito.*;
  * @author Bartosz Średziński
  * created on 22.10.2023
  */
+
 class DictionaryEnServiceTest{
     @Mock
     private DictionaryEnRepository repository;
@@ -78,5 +80,48 @@ class DictionaryEnServiceTest{
     void testCanHandle(){
         assertTrue(dictionaryService.canHandle(LanguageCode.EN));
         assertFalse(dictionaryService.canHandle(LanguageCode.PL));
+    }
+
+    @Test
+    public void testAddNewDictionaryRecord(){
+        DictionaryDto dto = new DictionaryDto();
+        dto.setExpression("Test Expression");
+        dto.setCategory("Test Category");
+
+        DictionaryEn newDictionary = new DictionaryEn();
+        newDictionary.setExpression(dto.getExpression());
+        newDictionary.setCategory(dto.getCategory());
+
+        when(repository.save(any(DictionaryEn.class))).thenReturn(newDictionary);
+
+        Dictionary result = dictionaryService.addNewDictionaryRecord(dto);
+
+        assertNotNull(result);
+        assertEquals(dto.getExpression(), result.getExpression());
+        assertEquals(dto.getCategory(), result.getCategory());
+    }
+
+    @Test
+    public void testDeleteByIdSuccess(){
+        Long id = 1L;
+
+        when(repository.existsById(id)).thenReturn(true);
+
+        boolean result = dictionaryService.deleteById(id);
+
+        assertTrue(result);
+        verify(repository).deleteById(id);
+    }
+
+    @Test
+    public void testDeleteByIdFail(){
+        Long id = 1L;
+
+        when(repository.existsById(id)).thenReturn(false);
+
+        boolean result = dictionaryService.deleteById(id);
+
+        assertFalse(result);
+        verify(repository, never()).deleteById(id);
     }
 }
