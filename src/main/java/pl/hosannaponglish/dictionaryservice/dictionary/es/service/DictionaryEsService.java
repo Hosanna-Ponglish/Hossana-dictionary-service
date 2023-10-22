@@ -33,6 +33,15 @@ public class DictionaryEsService implements DictionaryService{
     }
 
     @Override
+    public boolean deleteById(Long id){
+        if(repository.existsById(id)){
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public boolean canHandle(LanguageCode code){
         return LanguageCode.ES.equals(code);
     }

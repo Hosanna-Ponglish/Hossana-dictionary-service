@@ -18,13 +18,13 @@ import pl.hosannaponglish.dictionaryservice.dictionary.pl.model.DictionaryPl;
 import pl.hosannaponglish.dictionaryservice.dictionary.pl.service.DictionaryPlService;
 import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryServiceFactory;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -64,9 +64,8 @@ class DictionaryControllerTest{
 
         when(dictionaryPlService.getAll(pageable)).thenReturn(dummyPage);
 
-        mockMvc.perform(get("/api/v1/dictionary/PL/")
-                .param("page", "0")
-                .param("size", "10"))
+        mockMvc.perform(get("/api/v1/dictionary/PL/").param("page", "0")
+                        .param("size", "10"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(jsonPath("$.content", hasSize(1)));
@@ -88,5 +87,29 @@ class DictionaryControllerTest{
                 .andExpect(jsonPath("$.id", is(id.intValue())));
 
         verify(dictionaryPlService, times(1)).getOneById(id);
+    }
+
+    @Test
+    public void testDeleteOneSuccess() throws Exception{
+        Long id = 1L;
+        LanguageCode code = LanguageCode.PL;
+
+        when(serviceFactory.getService(code)).thenReturn(Optional.of(dictionaryPlService));
+        when(dictionaryPlService.deleteById(id)).thenReturn(true);
+
+        mockMvc.perform(delete("/api/v1/dictionary/PL/" + id))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testDeleteOneNotFound() throws Exception{
+        Long id = 1L;
+        LanguageCode code = LanguageCode.PL;
+
+        when(serviceFactory.getService(code)).thenReturn(Optional.of(dictionaryPlService));
+        when(dictionaryPlService.deleteById(id)).thenReturn(false);
+
+        mockMvc.perform(delete("/api/v1/dictionary/PL/" + id))
+                .andExpect(status().isNotFound());
     }
 }

@@ -16,5 +16,7 @@ public interface DictionaryService{
 
     Dictionary getOneById(Long id);
 
+    boolean deleteById(Long id);
+
     boolean canHandle(LanguageCode code);
 }

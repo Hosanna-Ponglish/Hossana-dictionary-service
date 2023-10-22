@@ -3,6 +3,7 @@ package pl.hosannaponglish.dictionaryservice.dictionary.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
 import pl.hosannaponglish.dictionaryservice.dictionary.exception.LanguageCodeNotSupported;
@@ -34,5 +35,19 @@ public class DictionaryController{
         return service.getService(code)
                 .orElseThrow(LanguageCodeNotSupported::new)
                 .getOneById(id);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Long> deleteOne(@PathVariable LanguageCode code, @PathVariable Long id){
+
+        if(service.getService(code)
+                .orElseThrow(LanguageCodeNotSupported::new)
+                .deleteById(id)){
+            return ResponseEntity.ok()
+                    .build();
+        }
+
+        return ResponseEntity.notFound()
+                .build();
     }
 }

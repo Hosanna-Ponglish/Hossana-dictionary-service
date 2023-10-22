@@ -24,7 +24,7 @@ import static org.mockito.Mockito.*;
  * @author Bartosz Średziński
  * created on 22.10.2023
  */
-public class DictionaryPlServiceTest{
+class DictionaryPlServiceTest{
 
     @Mock
     private DictionaryPlRepository repository;
