@@ -4,18 +4,18 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Bartosz Średziński
  * created on 22.10.2023
  */
 
-@Component
+@Configuration
 public class SwaggerConfiguration{
 
     @Bean
-    public OpenAPI swaggerConfiguration(){
+    public OpenAPI openApiConfiguration(){
         return new OpenAPI().info(new Info().title("Hosanna Dictionary Api")
                 .description("Service for language dictionaries")
                 .version("v0.1")
