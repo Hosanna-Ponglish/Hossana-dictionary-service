@@ -6,9 +6,11 @@ package pl.hosannaponglish.dictionaryservice.dictionary.model;
  */
 public interface Dictionary{
 
-    public Long getId();
+    Long getId();
 
-    public String getExpression();
+    void setId(Long id);
 
-    public String getCategory();
+    String getExpression();
+
+    String getCategory();
 }

@@ -3,10 +3,7 @@ package pl.hosannaponglish.dictionaryservice.dictionary.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
 import pl.hosannaponglish.dictionaryservice.dictionary.exception.LanguageCodeNotSupported;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
@@ -18,23 +15,24 @@ import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryService
  */
 
 @RestController
-@RequestMapping("api/v1/dictionary/{code}")
+@RequestMapping("api/v1/dictionary/{code}/")
 @RequiredArgsConstructor
 public class DictionaryController{
 
     private final DictionaryServiceFactory service;
 
     @GetMapping()
+    @ResponseBody
     public Page<Dictionary> getAll(@PathVariable LanguageCode code, Pageable pageable){
         return service.getService(code)
-                .orElseThrow(() -> new LanguageCodeNotSupported())
+                .orElseThrow(LanguageCodeNotSupported::new)
                 .getAll(pageable);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public Dictionary getOne(@PathVariable LanguageCode code, @PathVariable Long id){
         return service.getService(code)
-                .orElseThrow(() -> new LanguageCodeNotSupported())
+                .orElseThrow(LanguageCodeNotSupported::new)
                 .getOneById(id);
     }
 }
