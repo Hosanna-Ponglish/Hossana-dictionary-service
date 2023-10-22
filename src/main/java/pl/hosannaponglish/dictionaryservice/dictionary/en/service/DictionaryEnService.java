@@ -3,6 +3,7 @@ package pl.hosannaponglish.dictionaryservice.dictionary.en.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
 import pl.hosannaponglish.dictionaryservice.dictionary.en.model.DictionaryEn;
@@ -10,6 +11,7 @@ import pl.hosannaponglish.dictionaryservice.dictionary.en.repository.DictionaryE
 import pl.hosannaponglish.dictionaryservice.dictionary.exception.DictionaryNotFoundException;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.DictionaryDto;
+import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryBaseService;
 import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryService;
 
 /**
@@ -17,31 +19,21 @@ import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryService
  * created on 21.10.2023
  */
 
-@RequiredArgsConstructor
 @Service
-public class DictionaryEnService implements DictionaryService{
+public class DictionaryEnService extends DictionaryBaseService<DictionaryEn>{
 
     private final DictionaryEnRepository repository;
+
+    public DictionaryEnService(DictionaryEnRepository repository){
+        super(repository);
+        this.repository = repository;
+    }
 
     @Override
     public Page<Dictionary> getAll(Pageable pageable){
         return repository.getAll(pageable);
     }
 
-    @Override
-    public Dictionary getOneById(Long id){
-        return repository.findById(id)
-                .orElseThrow(() -> new DictionaryNotFoundException(id));
-    }
-
-    @Override
-    public boolean deleteById(Long id){
-        if(repository.existsById(id)){
-            repository.deleteById(id);
-            return true;
-        }
-        return false;
-    }
 
     @Override
     public Dictionary addNewDictionaryRecord(DictionaryDto dto){

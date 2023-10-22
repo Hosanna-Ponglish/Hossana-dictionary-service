@@ -1,46 +1,34 @@
 package pl.hosannaponglish.dictionaryservice.dictionary.pl.service;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
-import pl.hosannaponglish.dictionaryservice.dictionary.exception.DictionaryNotFoundException;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.DictionaryDto;
 import pl.hosannaponglish.dictionaryservice.dictionary.pl.model.DictionaryPl;
 import pl.hosannaponglish.dictionaryservice.dictionary.pl.repository.DictionaryPlRepository;
-import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryService;
+import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryBaseService;
 
 /**
  * @author Bartosz Średziński
  * created on 22.10.2023
  */
 
-@RequiredArgsConstructor
+
 @Service
-public class DictionaryPlService implements DictionaryService{
+public class DictionaryPlService extends DictionaryBaseService<DictionaryPl>{
 
     private final DictionaryPlRepository repository;
+
+    public DictionaryPlService(DictionaryPlRepository repository){
+        super(repository);
+        this.repository = repository;
+    }
 
     @Override
     public Page<Dictionary> getAll(Pageable pageable){
         return repository.getAll(pageable);
-    }
-
-    @Override
-    public Dictionary getOneById(Long id){
-        return repository.findById(id)
-                .orElseThrow(() -> new DictionaryNotFoundException(id));
-    }
-
-    @Override
-    public boolean deleteById(Long id){
-        if(repository.existsById(id)){
-            repository.deleteById(id);
-            return true;
-        }
-        return false;
     }
 
     @Override
@@ -57,5 +45,4 @@ public class DictionaryPlService implements DictionaryService{
     public boolean canHandle(LanguageCode code){
         return LanguageCode.PL.equals(code);
     }
-
 }

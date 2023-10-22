@@ -81,7 +81,7 @@ class DictionaryControllerTest{
     @Test
     void testGetOne() throws Exception{
         Long id = 1L;
-        Dictionary dictionary = new DictionaryPl();
+        DictionaryPl dictionary = new DictionaryPl();
         dictionary.setId(id);
 
         when(dictionaryPlService.getOneById(id)).thenReturn(dictionary);
