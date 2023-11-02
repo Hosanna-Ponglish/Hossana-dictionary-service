@@ -1,6 +1,6 @@
 package pl.hosannaponglish.dictionaryservice.dictionary.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
 
@@ -13,10 +13,10 @@ import java.util.Optional;
  */
 
 @Component
+@RequiredArgsConstructor
 public class DictionaryServiceFactory{
 
-    @Autowired
-    private List<DictionaryService> services;
+    private final List<DictionaryService> services;
 
     public Optional<DictionaryService> getService(LanguageCode code){
         return services.stream()
