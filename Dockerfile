@@ -1,7 +1,9 @@
+# syntax=docker/dockerfile:1
+
 FROM openjdk:21
 EXPOSE 8080
 
-WORKDIR /var/lib/buildkit/runc-overlayfs/snapshots/snapshots/1/fs/
+WORKDIR /app
 
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
