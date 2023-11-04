@@ -10,16 +10,6 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Set up JDK 21
-        uses: actions/setup-java@v3
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: maven
-
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
@@ -36,4 +26,4 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: barti132/dictionary-service:latest
+          tags: barti132/dictionary-service-0.1:latest
