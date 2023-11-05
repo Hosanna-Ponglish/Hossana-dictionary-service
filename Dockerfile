@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM openjdk:21 as base
+FROM maven:3.9 as base
 WORKDIR /app
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
@@ -16,4 +16,4 @@ RUN ./mvnw package
 FROM openjdk:21 as production
 EXPOSE 8080
 COPY --from=build /app/target/dictionary-service-*.jar /dictionary-service.jar
-CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/dictionary-service.jar"]
+CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "-Dspring-boot.run.profiles=h2", "/dictionary-service.jar"]
