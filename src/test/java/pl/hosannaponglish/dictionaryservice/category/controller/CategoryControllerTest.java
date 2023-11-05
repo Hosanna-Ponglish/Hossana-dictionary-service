@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
  */
 
 @ExtendWith(MockitoExtension.class)
-public class CategoryControllerTest{
+class CategoryControllerTest{
 
     @InjectMocks
     private CategoryController categoryController;
@@ -37,7 +37,7 @@ public class CategoryControllerTest{
     private CategoryService categoryService;
 
     @Test
-    public void testGetAllCategories(){
+    void testGetAllCategories(){
         Pageable pageable = PageRequest.of(0, 10);
         Page<Category> categoryPage = new PageImpl<>(List.of(new Category(), new Category()));
         when(categoryService.getAll(pageable)).thenReturn(categoryPage);
@@ -49,7 +49,7 @@ public class CategoryControllerTest{
     }
 
     @Test
-    public void testGetCategoryByIdExists(){
+    void testGetCategoryByIdExists(){
         Long categoryId = 1L;
         Category category = new Category();
         when(categoryService.getOneById(categoryId)).thenReturn(category);
@@ -61,7 +61,7 @@ public class CategoryControllerTest{
     }
 
     @Test
-    public void testGetCategoryByIdNotFound(){
+    void testGetCategoryByIdNotFound(){
         Long categoryId = 1L;
         when(categoryService.getOneById(categoryId)).thenThrow(new CategoryNotFoundException(categoryId));
 
@@ -70,7 +70,7 @@ public class CategoryControllerTest{
     }
 
     @Test
-    public void testDeleteCategoryExists(){
+    void testDeleteCategoryExists(){
         Long categoryId = 1L;
         when(categoryService.deleteById(categoryId)).thenReturn(true);
 
@@ -81,7 +81,7 @@ public class CategoryControllerTest{
     }
 
     @Test
-    public void testDeleteCategoryNotExists(){
+    void testDeleteCategoryNotExists(){
         Long categoryId = 1L;
         when(categoryService.deleteById(categoryId)).thenReturn(false);
 
@@ -92,7 +92,7 @@ public class CategoryControllerTest{
     }
 
     @Test
-    public void testCreateCategory(){
+    void testCreateCategory(){
         CategoryDto categoryDto = new CategoryDto();
         categoryDto.setSymbol("TestCategory");
         Category createdCategory = new Category();
@@ -109,7 +109,7 @@ public class CategoryControllerTest{
     }
 
     @Test
-    public void testCreateCategoryBadRequest(){
+    void testCreateCategoryBadRequest(){
         CategoryDto categoryDto = new CategoryDto();
         categoryDto.setSymbol(null);
         when(categoryService.addNewCategoryRecord(categoryDto)).thenReturn(null);

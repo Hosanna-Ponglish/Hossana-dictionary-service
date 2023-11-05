@@ -26,7 +26,7 @@ import static org.mockito.Mockito.*;
  */
 
 @ExtendWith(MockitoExtension.class)
-public class CategoryServiceTest{
+class CategoryServiceTest{
 
     @Mock
     private CategoryRepository categoryRepository;
@@ -34,12 +34,12 @@ public class CategoryServiceTest{
     private CategoryService categoryService;
 
     @BeforeEach
-    public void setUp(){
+    void setUp(){
         categoryService = new CategoryService(categoryRepository);
     }
 
     @Test
-    public void testGetAllCategories(){
+    void testGetAllCategories(){
         Pageable pageable = PageRequest.of(0, 10);
         Page<Category> categoryPage = new PageImpl<>(List.of(new Category(), new Category()));
         when(categoryRepository.findAll(pageable)).thenReturn(categoryPage);
@@ -51,7 +51,7 @@ public class CategoryServiceTest{
     }
 
     @Test
-    public void testGetCategoryByIdExists(){
+    void testGetCategoryByIdExists(){
         Long categoryId = 1L;
         Category category = new Category();
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
@@ -62,7 +62,7 @@ public class CategoryServiceTest{
     }
 
     @Test
-    public void testGetCategoryByIdNotFound(){
+    void testGetCategoryByIdNotFound(){
         Long categoryId = 1L;
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.empty());
 
@@ -70,7 +70,7 @@ public class CategoryServiceTest{
     }
 
     @Test
-    public void testAddNewCategoryRecord(){
+    void testAddNewCategoryRecord(){
         CategoryDto categoryDto = new CategoryDto();
         categoryDto.setSymbol("TestCategory");
 
@@ -83,7 +83,7 @@ public class CategoryServiceTest{
     }
 
     @Test
-    public void testDeleteCategoryExists(){
+    void testDeleteCategoryExists(){
         Long categoryId = 1L;
         when(categoryRepository.existsById(categoryId)).thenReturn(true);
 
@@ -94,7 +94,7 @@ public class CategoryServiceTest{
     }
 
     @Test
-    public void testDeleteCategoryNotExists(){
+    void testDeleteCategoryNotExists(){
         Long categoryId = 1L;
         when(categoryRepository.existsById(categoryId)).thenReturn(false);
 
