@@ -4,6 +4,7 @@ FROM eclipse-temurin:21-jdk-jammy as base
 WORKDIR /app
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
+RUN ./mvnw dependency:resolve
 COPY src ./src
 
 FROM base as development
