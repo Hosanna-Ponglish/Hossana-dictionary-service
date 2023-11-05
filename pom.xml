@@ -10,7 +10,7 @@
     </parent>
     <groupId>pl.Hosanna-Ponglish</groupId>
     <artifactId>dictionary-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1</version>
     <name>dictionary-service</name>
     <description>dictionary-service</description>
     <properties>
