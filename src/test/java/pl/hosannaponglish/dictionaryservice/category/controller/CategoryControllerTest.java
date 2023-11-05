@@ -56,8 +56,7 @@ class CategoryControllerTest{
 
         Category result = categoryController.getAll(categoryId);
 
-        assertThat(result).isNotNull();
-        assertThat(result).isEqualTo(category);
+        assertThat(result).isNotNull().isEqualTo(category);
     }
 
     @Test
