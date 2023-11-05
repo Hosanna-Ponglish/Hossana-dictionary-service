@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.hosannaponglish.dictionaryservice.category.exception.CategoryNotFoundException;
 import pl.hosannaponglish.dictionaryservice.category.model.Category;
+import pl.hosannaponglish.dictionaryservice.category.model.CategoryDto;
 import pl.hosannaponglish.dictionaryservice.category.repository.CategoryRepository;
 
 /**
@@ -26,5 +27,21 @@ public class CategoryService{
     public Category getOneById(Long id){
         return repository.findById(id)
                 .orElseThrow(() -> new CategoryNotFoundException(id));
+    }
+
+    public Category addNewCategoryRecord(CategoryDto dto){
+        Category newCategory = new Category();
+
+        newCategory.setSymbol(dto.getSymbol());
+
+        return repository.save(newCategory);
+    }
+
+    public boolean deleteById(Long id){
+        if(repository.existsById(id)){
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
