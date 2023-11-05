@@ -3,12 +3,12 @@
 FROM openjdk:21 as base
 WORKDIR /app
 COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
+COPY mvn pom.xml ./
 RUN ./mvnw dependency:resolve
 COPY src ./src
 
 FROM base as development
-CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=h2"]
+CMD ["./mvn", "spring-boot:run", "-Dspring-boot.run.profiles=h2"]
 
 FROM base as build
 RUN ./mvnw package
