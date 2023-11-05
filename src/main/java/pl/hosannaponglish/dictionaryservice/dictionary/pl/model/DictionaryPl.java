@@ -5,7 +5,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.hosannaponglish.dictionaryservice.category.model.Category;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
+
+import java.util.List;
 
 /**
  * @author Bartosz Średziński
@@ -26,5 +29,6 @@ public class DictionaryPl implements Dictionary{
     @NotNull
     private String expression;
 
-    private String category;
+    @ManyToMany
+    private List<Category> categories;
 }

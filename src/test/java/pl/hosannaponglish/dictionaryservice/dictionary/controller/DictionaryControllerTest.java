@@ -1,6 +1,7 @@
 package pl.hosannaponglish.dictionaryservice.dictionary.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -16,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import pl.hosannaponglish.dictionaryservice.category.model.Category;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.DictionaryDto;
@@ -61,7 +63,7 @@ class DictionaryControllerTest{
         Long id = 1L;
         DictionaryPl dictionary = new DictionaryPl();
         dictionary.setId(id);
-        dictionary.setCategory("cat");
+        dictionary.setCategories(Lists.list(new Category()));
         dictionary.setExpression("exp");
 
         Pageable pageable = PageRequest.of(0, 10);
@@ -123,7 +125,7 @@ class DictionaryControllerTest{
         LanguageCode code = LanguageCode.PL;
         DictionaryDto dto = new DictionaryDto();
         dto.setExpression("Test Expression");
-        dto.setCategory("Test Category");
+        dto.setCategories(Lists.list(new Category()));
 
         when(serviceFactory.getService(code)).thenReturn(Optional.of(dictionaryPlService));
 
@@ -148,7 +150,7 @@ class DictionaryControllerTest{
         LanguageCode code = LanguageCode.PL;
         DictionaryDto dto = new DictionaryDto();
         dto.setExpression("Test Expression");
-        dto.setCategory("Test Category");
+        dto.setCategories(Lists.list(new Category()));
 
         when(serviceFactory.getService(code)).thenReturn(Optional.of(dictionaryPlService));
 

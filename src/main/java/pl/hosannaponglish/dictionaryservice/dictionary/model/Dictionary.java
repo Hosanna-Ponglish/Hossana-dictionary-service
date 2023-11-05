@@ -1,5 +1,9 @@
 package pl.hosannaponglish.dictionaryservice.dictionary.model;
 
+import pl.hosannaponglish.dictionaryservice.category.model.Category;
+
+import java.util.List;
+
 /**
  * @author Bartosz Średziński
  * created on 21.10.2023
@@ -14,7 +18,7 @@ public interface Dictionary{
 
     void setExpression(String expression);
 
-    String getCategory();
+    List<Category> getCategories();
 
-    void setCategory(String category);
+    void setCategories(List<Category> categories);
 }

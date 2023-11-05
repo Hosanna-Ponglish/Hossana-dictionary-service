@@ -36,7 +36,7 @@ public class DictionaryPlService extends DictionaryBaseService<DictionaryPl>{
         DictionaryPl newDictionary = new DictionaryPl();
 
         newDictionary.setExpression(dto.getExpression());
-        newDictionary.setCategory(dto.getCategory());
+        newDictionary.setCategories(dto.getCategories());
 
         return repository.save(newDictionary);
     }
