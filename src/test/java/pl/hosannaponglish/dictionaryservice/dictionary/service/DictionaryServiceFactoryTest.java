@@ -32,12 +32,12 @@ public class DictionaryServiceFactoryTest{
 
 
     @BeforeEach
-    public void setUp(){
+    void setUp(){
         dictionaryServiceFactory = new DictionaryServiceFactory(Lists.list(service1, service2));
     }
 
     @Test
-    public void testGetServiceWhenServiceExists(){
+    void testGetServiceWhenServiceExists(){
         LanguageCode languageCode = LanguageCode.EN;
         when(service1.canHandle(languageCode)).thenReturn(false);
         when(service2.canHandle(languageCode)).thenReturn(true);
@@ -48,7 +48,7 @@ public class DictionaryServiceFactoryTest{
     }
 
     @Test
-    public void testGetServiceWhenNoServiceExists(){
+    void testGetServiceWhenNoServiceExists(){
         LanguageCode languageCode = LanguageCode.ES;
         when(service1.canHandle(languageCode)).thenReturn(false);
         when(service2.canHandle(languageCode)).thenReturn(false);
