@@ -1,18 +1,14 @@
 package pl.hosannaponglish.dictionaryservice.dictionary.en.service;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
 import pl.hosannaponglish.dictionaryservice.dictionary.en.model.DictionaryEn;
 import pl.hosannaponglish.dictionaryservice.dictionary.en.repository.DictionaryEnRepository;
-import pl.hosannaponglish.dictionaryservice.dictionary.exception.DictionaryNotFoundException;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.DictionaryDto;
 import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryBaseService;
-import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryService;
 
 /**
  * @author Bartosz Średziński
@@ -40,7 +36,7 @@ public class DictionaryEnService extends DictionaryBaseService<DictionaryEn>{
         DictionaryEn newDictionary = new DictionaryEn();
 
         newDictionary.setExpression(dto.getExpression());
-        newDictionary.setCategory(dto.getCategory());
+        newDictionary.setCategories(dto.getCategories());
 
         return repository.save(newDictionary);
     }

@@ -3,6 +3,9 @@ package pl.hosannaponglish.dictionaryservice.dictionary.model;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import pl.hosannaponglish.dictionaryservice.category.model.Category;
+
+import java.util.List;
 
 /**
  * @author Bartosz Średziński
@@ -17,5 +20,5 @@ public class DictionaryDto{
     private String expression;
 
     @NotNull
-    private String category;
+    private List<Category> categories;
 }

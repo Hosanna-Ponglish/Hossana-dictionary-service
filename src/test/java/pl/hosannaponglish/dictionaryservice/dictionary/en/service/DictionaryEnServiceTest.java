@@ -1,5 +1,6 @@
 package pl.hosannaponglish.dictionaryservice.dictionary.en.service;
 
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import pl.hosannaponglish.dictionaryservice.category.model.Category;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
 import pl.hosannaponglish.dictionaryservice.dictionary.en.model.DictionaryEn;
 import pl.hosannaponglish.dictionaryservice.dictionary.en.repository.DictionaryEnRepository;
@@ -18,6 +20,7 @@ import pl.hosannaponglish.dictionaryservice.dictionary.model.DictionaryDto;
 import java.util.Collections;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -86,11 +89,11 @@ class DictionaryEnServiceTest{
     void testAddNewDictionaryRecord(){
         DictionaryDto dto = new DictionaryDto();
         dto.setExpression("Test Expression");
-        dto.setCategory("Test Category");
+        dto.setCategories(Lists.list(new Category()));
 
         DictionaryEn newDictionary = new DictionaryEn();
         newDictionary.setExpression(dto.getExpression());
-        newDictionary.setCategory(dto.getCategory());
+        newDictionary.setCategories(Lists.list(new Category()));
 
         when(repository.save(any(DictionaryEn.class))).thenReturn(newDictionary);
 
@@ -98,7 +101,7 @@ class DictionaryEnServiceTest{
 
         assertNotNull(result);
         assertEquals(dto.getExpression(), result.getExpression());
-        assertEquals(dto.getCategory(), result.getCategory());
+        assertThat(dto.getCategories()).hasSize(1);
     }
 
     @Test
