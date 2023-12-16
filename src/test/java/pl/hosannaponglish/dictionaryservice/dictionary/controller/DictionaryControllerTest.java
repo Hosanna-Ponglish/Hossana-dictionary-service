@@ -26,7 +26,6 @@ import pl.hosannaponglish.dictionaryservice.dictionary.pl.service.DictionaryPlSe
 import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryServiceFactory;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -55,7 +54,7 @@ class DictionaryControllerTest{
 
     @BeforeEach
     void setUp(){
-        when(serviceFactory.getService(LanguageCode.PL)).thenReturn(Optional.of(dictionaryPlService));
+        when(serviceFactory.getService(LanguageCode.PL)).thenReturn(dictionaryPlService);
     }
 
     @Test
@@ -101,7 +100,7 @@ class DictionaryControllerTest{
         Long id = 1L;
         LanguageCode code = LanguageCode.PL;
 
-        when(serviceFactory.getService(code)).thenReturn(Optional.of(dictionaryPlService));
+        when(serviceFactory.getService(code)).thenReturn(dictionaryPlService);
         when(dictionaryPlService.deleteById(id)).thenReturn(true);
 
         mockMvc.perform(delete("/api/v1/dictionary/PL/" + id))
@@ -113,7 +112,7 @@ class DictionaryControllerTest{
         Long id = 1L;
         LanguageCode code = LanguageCode.PL;
 
-        when(serviceFactory.getService(code)).thenReturn(Optional.of(dictionaryPlService));
+        when(serviceFactory.getService(code)).thenReturn(dictionaryPlService);
         when(dictionaryPlService.deleteById(id)).thenReturn(false);
 
         mockMvc.perform(delete("/api/v1/dictionary/PL/" + id))
@@ -127,7 +126,7 @@ class DictionaryControllerTest{
         dto.setExpression("Test Expression");
         dto.setCategories(Lists.list(new Category()));
 
-        when(serviceFactory.getService(code)).thenReturn(Optional.of(dictionaryPlService));
+        when(serviceFactory.getService(code)).thenReturn(dictionaryPlService);
 
         Dictionary createdDictionary = new DictionaryPl();
         createdDictionary.setId(1L);
@@ -152,7 +151,7 @@ class DictionaryControllerTest{
         dto.setExpression("Test Expression");
         dto.setCategories(Lists.list(new Category()));
 
-        when(serviceFactory.getService(code)).thenReturn(Optional.of(dictionaryPlService));
+        when(serviceFactory.getService(code)).thenReturn(dictionaryPlService);
 
         when(dictionaryPlService.addNewDictionaryRecord(any(DictionaryDto.class))).thenReturn(null);
 
