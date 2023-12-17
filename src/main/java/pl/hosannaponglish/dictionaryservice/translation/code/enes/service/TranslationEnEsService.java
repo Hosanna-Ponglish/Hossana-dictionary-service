@@ -8,10 +8,9 @@ import pl.hosannaponglish.dictionaryservice.dictionary.es.model.DictionaryEs;
 import pl.hosannaponglish.dictionaryservice.translation.TranslationCode;
 import pl.hosannaponglish.dictionaryservice.translation.code.enes.model.TranslationEnEs;
 import pl.hosannaponglish.dictionaryservice.translation.code.enes.repository.TranslationEnEsRepository;
-import pl.hosannaponglish.dictionaryservice.translation.exception.TranslationNotFoundException;
 import pl.hosannaponglish.dictionaryservice.translation.model.Translation;
 import pl.hosannaponglish.dictionaryservice.translation.model.TranslationDto;
-import pl.hosannaponglish.dictionaryservice.translation.service.TranslationService;
+import pl.hosannaponglish.dictionaryservice.translation.service.TranslationBaseService;
 
 /**
  * @author Bartosz Średziński
@@ -19,11 +18,12 @@ import pl.hosannaponglish.dictionaryservice.translation.service.TranslationServi
  */
 
 @Service
-public class TranslationEnEsService implements TranslationService{
+public class TranslationEnEsService extends TranslationBaseService<TranslationEnEs>{
 
     private final TranslationEnEsRepository repository;
 
     public TranslationEnEsService(TranslationEnEsRepository repository){
+        super(repository);
         this.repository = repository;
     }
 
@@ -33,23 +33,8 @@ public class TranslationEnEsService implements TranslationService{
     }
 
     @Override
-    public Translation getOneById(Long id){
-        return repository.findById(id)
-                .orElseThrow(() -> new TranslationNotFoundException(id));
-    }
-
-    @Override
     public boolean canHandle(TranslationCode code){
         return TranslationCode.ENES.equals(code);
-    }
-
-    @Override
-    public boolean deleteById(Long id){
-        if(repository.existsById(id)){
-            repository.deleteById(id);
-            return true;
-        }
-        return false;
     }
 
     @Override
