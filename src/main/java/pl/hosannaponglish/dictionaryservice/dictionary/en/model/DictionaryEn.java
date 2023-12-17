@@ -14,6 +14,7 @@ import java.util.List;
  * @author Bartosz Średziński
  * created on 15.10.2023
  */
+
 @Entity
 @Table
 @Getter
