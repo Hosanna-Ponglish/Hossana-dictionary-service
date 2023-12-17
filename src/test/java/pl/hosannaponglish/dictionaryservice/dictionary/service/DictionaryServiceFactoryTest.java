@@ -7,9 +7,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
-import pl.hosannaponglish.dictionaryservice.dictionary.en.service.DictionaryEnService;
+import pl.hosannaponglish.dictionaryservice.dictionary.language.en.service.DictionaryEnService;
 import pl.hosannaponglish.dictionaryservice.dictionary.exception.LanguageCodeNotSupported;
-import pl.hosannaponglish.dictionaryservice.dictionary.pl.service.DictionaryPlService;
+import pl.hosannaponglish.dictionaryservice.dictionary.language.pl.service.DictionaryPlService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

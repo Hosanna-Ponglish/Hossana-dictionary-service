@@ -1,26 +1,26 @@
-package pl.hosannaponglish.dictionaryservice.dictionary.es.service;
+package pl.hosannaponglish.dictionaryservice.dictionary.language.pl.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
-import pl.hosannaponglish.dictionaryservice.dictionary.es.model.DictionaryEs;
-import pl.hosannaponglish.dictionaryservice.dictionary.es.repository.DictionaryEsRepository;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.DictionaryDto;
+import pl.hosannaponglish.dictionaryservice.dictionary.language.pl.model.DictionaryPl;
+import pl.hosannaponglish.dictionaryservice.dictionary.language.pl.repository.DictionaryPlRepository;
 import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryBaseService;
 
 /**
  * @author Bartosz Średziński
- * created on 21.10.2023
+ * created on 22.10.2023
  */
 
 @Service
-public class DictionaryEsService extends DictionaryBaseService<DictionaryEs>{
+public class DictionaryPlService extends DictionaryBaseService<DictionaryPl>{
 
-    private final DictionaryEsRepository repository;
+    private final DictionaryPlRepository repository;
 
-    public DictionaryEsService(DictionaryEsRepository repository){
+    public DictionaryPlService(DictionaryPlRepository repository){
         super(repository);
         this.repository = repository;
     }
@@ -32,7 +32,7 @@ public class DictionaryEsService extends DictionaryBaseService<DictionaryEs>{
 
     @Override
     public Dictionary addNewDictionaryRecord(DictionaryDto dto){
-        DictionaryEs newDictionary = new DictionaryEs();
+        DictionaryPl newDictionary = new DictionaryPl();
 
         newDictionary.setExpression(dto.getExpression());
         newDictionary.setCategories(dto.getCategories());
@@ -42,6 +42,6 @@ public class DictionaryEsService extends DictionaryBaseService<DictionaryEs>{
 
     @Override
     public boolean canHandle(LanguageCode code){
-        return LanguageCode.ES.equals(code);
+        return LanguageCode.PL.equals(code);
     }
 }

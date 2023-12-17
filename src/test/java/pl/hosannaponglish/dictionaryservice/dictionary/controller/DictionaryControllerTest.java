@@ -21,8 +21,8 @@ import pl.hosannaponglish.dictionaryservice.category.model.Category;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.DictionaryDto;
-import pl.hosannaponglish.dictionaryservice.dictionary.pl.model.DictionaryPl;
-import pl.hosannaponglish.dictionaryservice.dictionary.pl.service.DictionaryPlService;
+import pl.hosannaponglish.dictionaryservice.dictionary.language.pl.model.DictionaryPl;
+import pl.hosannaponglish.dictionaryservice.dictionary.language.pl.service.DictionaryPlService;
 import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryServiceFactory;
 
 import java.util.List;

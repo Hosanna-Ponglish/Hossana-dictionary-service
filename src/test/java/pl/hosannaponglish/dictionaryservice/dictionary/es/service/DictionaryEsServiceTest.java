@@ -11,9 +11,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import pl.hosannaponglish.dictionaryservice.category.model.Category;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
-import pl.hosannaponglish.dictionaryservice.dictionary.es.model.DictionaryEs;
-import pl.hosannaponglish.dictionaryservice.dictionary.es.repository.DictionaryEsRepository;
+import pl.hosannaponglish.dictionaryservice.dictionary.language.es.model.DictionaryEs;
+import pl.hosannaponglish.dictionaryservice.dictionary.language.es.repository.DictionaryEsRepository;
 import pl.hosannaponglish.dictionaryservice.dictionary.exception.DictionaryNotFoundException;
+import pl.hosannaponglish.dictionaryservice.dictionary.language.es.service.DictionaryEsService;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.DictionaryDto;
 

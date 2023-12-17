@@ -5,8 +5,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.hosannaponglish.dictionaryservice.dictionary.es.model.DictionaryEs;
-import pl.hosannaponglish.dictionaryservice.dictionary.pl.model.DictionaryPl;
+import pl.hosannaponglish.dictionaryservice.dictionary.language.es.model.DictionaryEs;
+import pl.hosannaponglish.dictionaryservice.dictionary.language.pl.model.DictionaryPl;
 import pl.hosannaponglish.dictionaryservice.translation.model.Translation;
 
 /**

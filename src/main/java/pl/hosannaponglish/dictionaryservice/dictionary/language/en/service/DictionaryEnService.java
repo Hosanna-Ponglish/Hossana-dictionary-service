@@ -1,27 +1,26 @@
-package pl.hosannaponglish.dictionaryservice.dictionary.pl.service;
+package pl.hosannaponglish.dictionaryservice.dictionary.language.en.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
+import pl.hosannaponglish.dictionaryservice.dictionary.language.en.model.DictionaryEn;
+import pl.hosannaponglish.dictionaryservice.dictionary.language.en.repository.DictionaryEnRepository;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.DictionaryDto;
-import pl.hosannaponglish.dictionaryservice.dictionary.pl.model.DictionaryPl;
-import pl.hosannaponglish.dictionaryservice.dictionary.pl.repository.DictionaryPlRepository;
 import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryBaseService;
 
 /**
  * @author Bartosz Średziński
- * created on 22.10.2023
+ * created on 21.10.2023
  */
 
-
 @Service
-public class DictionaryPlService extends DictionaryBaseService<DictionaryPl>{
+public class DictionaryEnService extends DictionaryBaseService<DictionaryEn>{
 
-    private final DictionaryPlRepository repository;
+    private final DictionaryEnRepository repository;
 
-    public DictionaryPlService(DictionaryPlRepository repository){
+    public DictionaryEnService(DictionaryEnRepository repository){
         super(repository);
         this.repository = repository;
     }
@@ -31,9 +30,10 @@ public class DictionaryPlService extends DictionaryBaseService<DictionaryPl>{
         return repository.getAll(pageable);
     }
 
+
     @Override
     public Dictionary addNewDictionaryRecord(DictionaryDto dto){
-        DictionaryPl newDictionary = new DictionaryPl();
+        DictionaryEn newDictionary = new DictionaryEn();
 
         newDictionary.setExpression(dto.getExpression());
         newDictionary.setCategories(dto.getCategories());
@@ -43,6 +43,6 @@ public class DictionaryPlService extends DictionaryBaseService<DictionaryPl>{
 
     @Override
     public boolean canHandle(LanguageCode code){
-        return LanguageCode.PL.equals(code);
+        return LanguageCode.EN.equals(code);
     }
 }

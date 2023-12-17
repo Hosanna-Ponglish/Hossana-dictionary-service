@@ -1,4 +1,4 @@
-package pl.hosannaponglish.dictionaryservice.dictionary.en.model;
+package pl.hosannaponglish.dictionaryservice.dictionary.language.en.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
