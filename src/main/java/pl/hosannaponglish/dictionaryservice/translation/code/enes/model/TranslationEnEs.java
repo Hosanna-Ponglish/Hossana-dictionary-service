@@ -1,6 +1,7 @@
 package pl.hosannaponglish.dictionaryservice.translation.code.enes.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,9 +24,11 @@ public class TranslationEnEs implements Translation{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @ManyToOne
     private DictionaryEn expressionSource;
 
+    @NotNull
     @ManyToOne
     private DictionaryEs expressionTarget;
 }

@@ -1,6 +1,7 @@
 package pl.hosannaponglish.dictionaryservice.translation.code.enpl.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,9 +25,11 @@ public class TranslationEnPl implements Translation{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @ManyToOne
     private DictionaryEn expressionSource;
 
+    @NotNull
     @ManyToOne
     private DictionaryPl expressionTarget;
 
