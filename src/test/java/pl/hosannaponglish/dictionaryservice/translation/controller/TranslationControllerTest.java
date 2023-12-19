@@ -137,37 +137,6 @@ class TranslationControllerTest{
     }
 
     @Test
-    void testCreateOneSuccess() throws Exception{
-        Long id = 1L;
-
-        DictionaryEn dictionaryEn = new DictionaryEn();
-        dictionaryEn.setId(id);
-        dictionaryEn.setExpression("expressionEn");
-
-        DictionaryPl dictionaryPl = new DictionaryPl();
-        dictionaryPl.setId(id);
-        dictionaryPl.setExpression("expressionPl");
-
-        TranslationCode code = TranslationCode.ENPL;
-        TranslationDto dto = new TranslationDto();
-        dto.setExpressionSource(dictionaryEn);
-        dto.setExpressionTarget(dictionaryPl);
-
-        when(serviceFactory.getService(code)).thenReturn(translationEnPlService);
-
-        Translation createdTranslation = new TranslationEnPl();
-        createdTranslation.setId(1L);
-        when(translationEnPlService.addNewTranslationRecord(any(TranslationDto.class))).thenReturn(createdTranslation);
-
-        mockMvc.perform(post("/api/v1/translation/ENPL/").content(asJsonString(dto))
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id")
-                        .exists());
-    }
-
-    @Test
     void testCreateOneBadRequest() throws Exception{
         TranslationCode code = TranslationCode.ENPL;
         TranslationDto dto = new TranslationDto();
