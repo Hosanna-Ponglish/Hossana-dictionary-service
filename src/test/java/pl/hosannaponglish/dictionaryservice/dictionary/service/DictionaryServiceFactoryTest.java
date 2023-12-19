@@ -30,7 +30,6 @@ class DictionaryServiceFactoryTest{
     @Mock
     private DictionaryEnService service2;
 
-
     @BeforeEach
     void setUp(){
         dictionaryServiceFactory = new DictionaryServiceFactory(Lists.list(service1, service2));
