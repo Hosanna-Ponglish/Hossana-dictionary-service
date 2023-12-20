@@ -169,13 +169,23 @@ class TranslationControllerTest{
 
     @Test
     void testCreateOneBadRequest() throws Exception{
+        Long id = 1L;
+
         TranslationCode code = TranslationCode.ENPL;
         TranslationDto dto = new TranslationDto();
 
-        when(serviceFactory.getService(code)).thenReturn(translationEnPlService);
+        DictionaryEn dictionaryEn = new DictionaryEn();
+        dictionaryEn.setId(id);
+        dictionaryEn.setExpression("expressionEn");
 
-        Translation createdTranslation = new TranslationEnPl();
-        createdTranslation.setId(1L);
+        DictionaryPl dictionaryPl = new DictionaryPl();
+        dictionaryPl.setId(id);
+        dictionaryPl.setExpression("expressionPl");
+
+        dto.setExpressionSource(dictionaryEn);
+        dto.setExpressionTarget(dictionaryPl);
+
+        when(serviceFactory.getService(code)).thenReturn(translationEnPlService);
         when(translationEnPlService.addNewTranslationRecord(any(TranslationDto.class))).thenReturn(null);
 
         mockMvc.perform(post("/api/v1/translation/ENPL/").content(asJsonString(dto))
