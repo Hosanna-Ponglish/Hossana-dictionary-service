@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import pl.hosannaponglish.dictionaryservice.dictionary.language.en.model.DictionaryEn;
 import pl.hosannaponglish.dictionaryservice.dictionary.language.es.model.DictionaryEs;
 import pl.hosannaponglish.dictionaryservice.translation.TranslationCode;
@@ -140,4 +141,17 @@ class TranslationEnEsServiceTest{
         verify(repository, times(0)).deleteById(id);
     }
 
+    @Test
+    void testSearch(){
+        String expression = "expression";
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Translation> dummyPage = new PageImpl<>(Collections.emptyList(), pageable, 0);
+
+        when(repository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(dummyPage);
+
+        Page<Translation> result = service.search(expression, pageable);
+
+        verify(repository, times(1)).findAll(any(Specification.class), any(Pageable.class));
+        assertEquals(dummyPage, result);
+    }
 }

@@ -1,8 +1,11 @@
 package pl.hosannaponglish.dictionaryservice.translation.service;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import pl.hosannaponglish.dictionaryservice.translation.exception.TranslationNotFoundException;
 import pl.hosannaponglish.dictionaryservice.translation.model.Translation;
+import pl.hosannaponglish.dictionaryservice.translation.repository.TranslationRepository;
+import pl.hosannaponglish.dictionaryservice.translation.specification.TranslationSpecification;
 
 /**
  * @author Bartosz Średziński
@@ -11,10 +14,15 @@ import pl.hosannaponglish.dictionaryservice.translation.model.Translation;
 
 public abstract class TranslationBaseService<T extends Translation> implements TranslationService{
 
-    private final JpaRepository<T, Long> repository;
+    private final TranslationRepository<T, Long> repository;
 
-    protected TranslationBaseService(JpaRepository<T, Long> repository){
+    protected TranslationBaseService(TranslationRepository<T, Long> repository){
         this.repository = repository;
+    }
+
+    @Override
+    public Page<Translation> getAll(Pageable pageable){
+        return repository.getAll(pageable);
     }
 
     @Override
@@ -30,5 +38,10 @@ public abstract class TranslationBaseService<T extends Translation> implements T
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Page<Translation> search(String expression, Pageable pageable){
+        return repository.findAll(TranslationSpecification.hasExpressionSourceOrExpressionTargetLike(expression), pageable);
     }
 }

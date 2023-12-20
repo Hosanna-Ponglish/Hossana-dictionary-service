@@ -24,6 +24,12 @@ public class TranslationController{
 
     private final TranslationServiceFactory service;
 
+    @GetMapping("search")
+    public Page<Translation> search(@PathVariable TranslationCode code, @RequestParam String expression, Pageable pageable){
+        return service.getService(code)
+                .search(expression, pageable);
+    }
+
     @GetMapping()
     public Page<Translation> getAll(@PathVariable TranslationCode code, Pageable pageable){
         return service.getService(code)

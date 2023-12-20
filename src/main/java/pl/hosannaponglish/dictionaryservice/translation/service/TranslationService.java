@@ -22,4 +22,6 @@ public interface TranslationService{
     boolean deleteById(Long id);
 
     Translation addNewTranslationRecord(TranslationDto dto);
+
+    Page<Translation> search(String expression, Pageable pageable);
 }

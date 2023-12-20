@@ -1,7 +1,5 @@
 package pl.hosannaponglish.dictionaryservice.translation.code.enes.service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.hosannaponglish.dictionaryservice.dictionary.language.en.model.DictionaryEn;
 import pl.hosannaponglish.dictionaryservice.dictionary.language.es.model.DictionaryEs;
@@ -25,11 +23,6 @@ public class TranslationEnEsService extends TranslationBaseService<TranslationEn
     public TranslationEnEsService(TranslationEnEsRepository repository){
         super(repository);
         this.repository = repository;
-    }
-
-    @Override
-    public Page<Translation> getAll(Pageable pageable){
-        return repository.getAll(pageable);
     }
 
     @Override

@@ -1,7 +1,5 @@
 package pl.hosannaponglish.dictionaryservice.translation.code.enpl.service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.hosannaponglish.dictionaryservice.dictionary.language.en.model.DictionaryEn;
 import pl.hosannaponglish.dictionaryservice.dictionary.language.pl.model.DictionaryPl;
@@ -28,11 +26,6 @@ public class TranslationEnPlService extends TranslationBaseService<TranslationEn
     }
 
     @Override
-    public Page<Translation> getAll(Pageable pageable){
-        return repository.getAll(pageable);
-    }
-
-    @Override
     public boolean canHandle(TranslationCode code){
         return TranslationCode.ENPL.equals(code);
     }
@@ -46,4 +39,5 @@ public class TranslationEnPlService extends TranslationBaseService<TranslationEn
 
         return repository.save(newTranslation);
     }
+
 }
