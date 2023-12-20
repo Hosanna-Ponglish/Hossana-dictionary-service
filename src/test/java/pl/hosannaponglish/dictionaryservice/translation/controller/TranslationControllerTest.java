@@ -1,6 +1,5 @@
 package pl.hosannaponglish.dictionaryservice.translation.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -30,6 +29,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static pl.hosannaponglish.dictionaryservice.utils.TestUtils.asJsonString;
 
 /**
  * @author Bartosz Średziński
@@ -137,6 +137,37 @@ class TranslationControllerTest{
     }
 
     @Test
+    void testCreateOneSuccess() throws Exception{
+        Long id = 1L;
+
+        DictionaryEn dictionaryEn = new DictionaryEn();
+        dictionaryEn.setId(id);
+        dictionaryEn.setExpression("expressionEn");
+
+        DictionaryPl dictionaryPl = new DictionaryPl();
+        dictionaryPl.setId(id);
+        dictionaryPl.setExpression("expressionPl");
+
+        TranslationCode code = TranslationCode.ENPL;
+        TranslationDto dto = new TranslationDto();
+        dto.setExpressionSource(dictionaryEn);
+        dto.setExpressionTarget(dictionaryPl);
+
+        when(serviceFactory.getService(code)).thenReturn(translationEnPlService);
+
+        Translation createdTranslation = new TranslationEnPl();
+        createdTranslation.setId(1L);
+        when(translationEnPlService.addNewTranslationRecord(any(TranslationDto.class))).thenReturn(createdTranslation);
+
+        mockMvc.perform(post("/api/v1/translation/ENPL/").content(asJsonString(dto))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id")
+                        .exists());
+    }
+
+    @Test
     void testCreateOneBadRequest() throws Exception{
         TranslationCode code = TranslationCode.ENPL;
         TranslationDto dto = new TranslationDto();
@@ -147,15 +178,8 @@ class TranslationControllerTest{
         createdTranslation.setId(1L);
         when(translationEnPlService.addNewTranslationRecord(any(TranslationDto.class))).thenReturn(null);
 
-        mockMvc.perform(post("/api/v1/translation/ENPL/").contentType("application/json"))
+        mockMvc.perform(post("/api/v1/translation/ENPL/").content(asJsonString(dto))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
-    }
-
-    private String asJsonString(final Object obj){
-        try{
-            return new ObjectMapper().writeValueAsString(obj);
-        }catch(Exception e){
-            throw new RuntimeException(e);
-        }
     }
 }
