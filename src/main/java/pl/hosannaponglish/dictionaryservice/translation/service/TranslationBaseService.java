@@ -5,7 +5,7 @@ import org.springframework.data.domain.Pageable;
 import pl.hosannaponglish.dictionaryservice.translation.exception.TranslationNotFoundException;
 import pl.hosannaponglish.dictionaryservice.translation.model.Translation;
 import pl.hosannaponglish.dictionaryservice.translation.repository.TranslationRepository;
-import pl.hosannaponglish.dictionaryservice.translation.specification.TranslationSpecification;
+import pl.hosannaponglish.dictionaryservice.translation.specification.TranslationSpecifications;
 
 /**
  * @author Bartosz Średziński
@@ -42,6 +42,6 @@ public abstract class TranslationBaseService<T extends Translation> implements T
 
     @Override
     public Page<Translation> search(String expression, Pageable pageable){
-        return repository.findAll(TranslationSpecification.hasExpressionSourceOrExpressionTargetLike(expression), pageable);
+        return repository.findAll(TranslationSpecifications.hasExpressionSourceOrExpressionTargetLike(expression), pageable);
     }
 }

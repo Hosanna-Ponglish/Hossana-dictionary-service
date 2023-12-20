@@ -10,7 +10,7 @@ import pl.hosannaponglish.dictionaryservice.translation.model.Translation;
  */
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
-public class TranslationSpecification{
+public class TranslationSpecifications{
 
     public static Specification<Translation> hasExpressionSourceOrExpressionTargetLike(String expression){
         return (root, query, builder) -> builder.or(builder.like(root.get("expressionSource")
