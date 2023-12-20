@@ -1,6 +1,5 @@
 package pl.hosannaponglish.dictionaryservice.dictionary.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,10 +18,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import pl.hosannaponglish.dictionaryservice.category.model.Category;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
+import pl.hosannaponglish.dictionaryservice.dictionary.language.pl.model.DictionaryPl;
+import pl.hosannaponglish.dictionaryservice.dictionary.language.pl.service.DictionaryPlService;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.DictionaryDto;
-import pl.hosannaponglish.dictionaryservice.dictionary.pl.model.DictionaryPl;
-import pl.hosannaponglish.dictionaryservice.dictionary.pl.service.DictionaryPlService;
 import pl.hosannaponglish.dictionaryservice.dictionary.service.DictionaryServiceFactory;
 
 import java.util.List;
@@ -33,6 +32,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static pl.hosannaponglish.dictionaryservice.utils.TestUtils.asJsonString;
 
 /**
  * @author Bartosz Średziński
@@ -160,13 +160,5 @@ class DictionaryControllerTest{
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status()
                         .isBadRequest());
-    }
-
-    private String asJsonString(final Object obj){
-        try{
-            return new ObjectMapper().writeValueAsString(obj);
-        }catch(Exception e){
-            throw new RuntimeException(e);
-        }
     }
 }
