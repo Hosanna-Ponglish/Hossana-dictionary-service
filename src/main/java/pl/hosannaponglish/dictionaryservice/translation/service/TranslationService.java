@@ -2,8 +2,6 @@ package pl.hosannaponglish.dictionaryservice.translation.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
-import pl.hosannaponglish.dictionaryservice.dictionary.model.DictionaryDto;
 import pl.hosannaponglish.dictionaryservice.translation.TranslationCode;
 import pl.hosannaponglish.dictionaryservice.translation.model.Translation;
 import pl.hosannaponglish.dictionaryservice.translation.model.TranslationDto;

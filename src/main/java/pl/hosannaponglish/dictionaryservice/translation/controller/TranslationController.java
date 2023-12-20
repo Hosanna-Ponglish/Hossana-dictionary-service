@@ -25,7 +25,6 @@ public class TranslationController{
     private final TranslationServiceFactory service;
 
     @GetMapping()
-    @ResponseBody
     public Page<Translation> getAll(@PathVariable TranslationCode code, Pageable pageable){
         return service.getService(code)
                 .getAll(pageable);
