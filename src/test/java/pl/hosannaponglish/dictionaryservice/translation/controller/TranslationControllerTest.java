@@ -192,4 +192,37 @@ class TranslationControllerTest{
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }
+
+    @Test
+    void testSearch() throws Exception{
+        Long id = 1L;
+
+        DictionaryEn dictionaryEn = new DictionaryEn();
+        dictionaryEn.setId(id);
+        dictionaryEn.setExpression("expressionEn");
+
+        DictionaryPl dictionaryPl = new DictionaryPl();
+        dictionaryPl.setId(id);
+        dictionaryPl.setExpression("expressionPl");
+
+        TranslationEnPl translation = new TranslationEnPl();
+        translation.setId(id);
+        translation.setExpressionSource(dictionaryEn);
+        translation.setExpressionTarget(dictionaryPl);
+
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Translation> dummyPage = new PageImpl<>(List.of(translation));
+
+        when(translationEnPlService.search("expressionEn", pageable)).thenReturn(dummyPage);
+
+        mockMvc.perform(get("/api/v1/translation/ENPL/search").param("page", "0")
+                        .param("size", "10")
+                        .param("expression", "expressionEn")
+                        .contentType("application/json"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.content", hasSize(1)));
+
+        verify(translationEnPlService, times(1)).search("expressionEn", pageable);
+    }
 }
