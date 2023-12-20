@@ -20,7 +20,7 @@ import java.util.List;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = DictionaryPl.class, name = "dictionaryPl"),
         @JsonSubTypes.Type(value = DictionaryEn.class, name = "dictionaryEn"),
-        @JsonSubTypes.Type(value = DictionaryEs.class, name = "dictionaryEn")
+        @JsonSubTypes.Type(value = DictionaryEs.class, name = "dictionaryEs")
 })
 public interface Dictionary{
 
