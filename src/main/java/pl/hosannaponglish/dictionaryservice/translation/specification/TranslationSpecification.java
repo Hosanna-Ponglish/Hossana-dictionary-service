@@ -1,5 +1,6 @@
 package pl.hosannaponglish.dictionaryservice.translation.specification;
 
+import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import pl.hosannaponglish.dictionaryservice.translation.model.Translation;
 
@@ -8,6 +9,7 @@ import pl.hosannaponglish.dictionaryservice.translation.model.Translation;
  * created on 20.12.2023
  */
 
+@NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class TranslationSpecification{
 
     public static Specification<Translation> hasExpressionSourceOrExpressionTargetLike(String expression){
