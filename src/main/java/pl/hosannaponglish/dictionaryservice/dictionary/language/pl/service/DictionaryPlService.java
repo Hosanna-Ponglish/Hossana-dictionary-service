@@ -1,7 +1,5 @@
 package pl.hosannaponglish.dictionaryservice.dictionary.language.pl.service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.hosannaponglish.dictionaryservice.dictionary.LanguageCode;
 import pl.hosannaponglish.dictionaryservice.dictionary.model.Dictionary;
@@ -23,11 +21,6 @@ public class DictionaryPlService extends DictionaryBaseService<DictionaryPl>{
     public DictionaryPlService(DictionaryPlRepository repository){
         super(repository);
         this.repository = repository;
-    }
-
-    @Override
-    public Page<Dictionary> getAll(Pageable pageable){
-        return repository.getAll(pageable);
     }
 
     @Override
